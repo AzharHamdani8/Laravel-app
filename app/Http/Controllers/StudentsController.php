@@ -39,6 +39,16 @@ class StudentsController extends Controller
     public function store(Request $request)
     {
 
+      $request->validate([
+        'nama' => 'required',
+        'nrp' => 'required|size:9',
+        'email' => 'required',
+        'jurusan' => 'required'
+        
+       
+
+      ]);      
+
             $student = new Student;
             $student->nama = $request->nama; 
             $student->nrp = $request->nrp; 
@@ -47,7 +57,7 @@ class StudentsController extends Controller
 
             $student->save();
 
-            return redirect('/students');
+            return redirect('/students')->with('status','Data Mahasiswa Behasil Ditambahkan!');
     }
 
     /**
